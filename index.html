@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setembro Amarelo & Tecnologia — a notificação nunca para</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night: #171B3A;
+    --night-deep: #10132B;
+    --panel: #1F2450;
+    --yellow: #F4C84B;
+    --yellow-soft: #F4C84B22;
+    --coral: #F0866B;
+    --cream: #F6F3EA;
+    --cream-dim: #C9CADE;
+    --line: #34386A;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--night);
+    color:var(--cream);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0 0 .4em 0;
+    letter-spacing:-.01em;
+  }
+  p{margin:0 0 1em 0; color:var(--cream-dim); max-width:64ch;}
+  a{color:var(--yellow);}
+  .wrap{max-width:960px; margin:0 auto; padding:0 28px;}
+  section{padding:88px 0;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:linear-gradient(var(--night-deep), var(--night-deep) 80%, transparent);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 28px;}
+  .ribbon{width:14px; height:22px; background:var(--yellow); border-radius:60% 60% 50% 50% / 70% 70% 40% 40%; transform:rotate(20deg); flex-shrink:0;}
+  .brand{display:flex; align-items:center; gap:10px; font-size:15px; color:var(--cream); text-decoration:none;}
+  .brand b{font-family:'Fraunces', serif; font-weight:500;}
+  nav ul{list-style:none; display:flex; gap:26px; margin:0; padding:0; font-size:14px;}
+  nav ul a{color:var(--cream-dim); text-decoration:none;}
+  nav ul a:hover{color:var(--yellow);}
+  @media (max-width:640px){ nav ul{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:110px 0 90px;
+    position:relative;
+    overflow:hidden;
+    background:radial-gradient(circle at 78% 18%, #F4C84B14, transparent 55%);
+  }
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:9px;
+    font-size:14px; color:var(--yellow); margin-bottom:26px;
+  }
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--coral); animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.35; transform:scale(1.5);} }
+  .hero h1{
+    font-size:clamp(38px, 6vw, 66px);
+    line-height:1.05;
+    max-width:13ch;
+    color:var(--cream);
+  }
+  .hero h1 em{font-style:italic; color:var(--yellow);}
+  .hero p.lede{font-size:18px; max-width:52ch; margin-top:22px;}
+  .hero .meta{margin-top:40px; font-size:13px; color:var(--cream-dim); border-top:1px solid var(--line); padding-top:18px; max-width:420px;}
+
+  /* ---------- INTRO STRIP ---------- */
+  .intro{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--night-deep);}
+  .intro .wrap{padding:60px 28px; display:grid; grid-template-columns:1fr 1.4fr; gap:48px;}
+  .intro h2{font-size:26px; color:var(--yellow);}
+  @media (max-width:720px){ .intro .wrap{grid-template-columns:1fr;} }
+
+  /* ---------- THEMES ---------- */
+  .theme-row{
+    display:grid; grid-template-columns:auto 1fr; gap:28px;
+    padding:30px 0; border-top:1px solid var(--line);
+  }
+  .theme-row:last-child{border-bottom:1px solid var(--line);}
+  .theme-num{font-family:'Fraunces', serif; font-size:34px; color:var(--yellow); opacity:.55; min-width:44px;}
+  .theme-row h3{font-size:21px; color:var(--cream);}
+  .theme-row p{margin:0;}
+
+  /* ---------- SIGNS ---------- */
+  .signs{background:var(--panel); border-radius:2px;}
+  .signs-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:36px;}
+  .signs-grid div{background:var(--panel); padding:26px 28px;}
+  .signs-grid p{margin:0; color:var(--cream); font-size:15px;}
+  @media (max-width:640px){ .signs-grid{grid-template-columns:1fr;} }
+
+  /* ---------- BREATHE WIDGET ---------- */
+  .breathe{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    background:var(--night-deep); border:1px solid var(--line); border-radius:4px;
+    padding:56px 28px; margin-top:40px;
+  }
+  .breathe-circle{
+    width:130px; height:130px; border-radius:50%;
+    border:1px solid var(--yellow);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; color:var(--yellow); cursor:pointer;
+    transition:transform 4s ease-in-out, background 4s ease-in-out;
+    background:var(--yellow-soft);
+    user-select:none;
+  }
+  .breathe-circle.active{transform:scale(1.5); background:#F4C84B33;}
+  .breathe small{display:block; margin-top:22px; color:var(--cream-dim); font-size:13px;}
+
+  /* ---------- HELP ---------- */
+  .help{background:var(--night-deep); border-top:1px solid var(--line);}
+  .help-card{
+    background:var(--panel); border:1px solid var(--line);
+    padding:30px 32px; margin-top:36px; border-radius:2px;
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .help-card .num{font-family:'Fraunces', serif; font-size:44px; color:var(--yellow);}
+  .help-list{margin-top:28px; padding:0; list-style:none;}
+  .help-list li{padding:14px 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:20px; font-size:15px; color:var(--cream);}
+  .help-list li span:last-child{color:var(--cream-dim); text-align:right;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:50px 0; text-align:center;}
+  footer p{max-width:none; margin:0 auto; font-size:13px; color:var(--cream-dim);}
+  footer .ribbon-row{display:flex; justify-content:center; gap:10px; margin-bottom:16px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="ribbon"></span><b>Setembro&nbsp;Amarelo</b>&nbsp;× Tecnologia</a>
+    <ul>
+      <li><a href="#tech">Tecnologia e ansiedade</a></li>
+      <li><a href="#sinais">Sinais</a></li>
+      <li><a href="#respirar">Respire</a></li>
+      <li><a href="#ajuda">Buscar ajuda</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Setembro é amarelo, a tela é azul</div>
+    <h1>A notificação nunca <em>para</em> de piscar.</h1>
+    <p class="lede">Vivemos conectados a telas que prometem nos aproximar e, às vezes, só aumentam a distância de nós mesmos. Este site foi feito por alunos de TI para falar sobre saúde mental na era digital — e sobre pedir ajuda.</p>
+    <div class="meta">Projeto do curso técnico de Informática — Setembro Amarelo 2026</div>
+  </div>
+</header>
+
+<div class="intro">
+  <div class="wrap">
+    <h2>O que é Setembro Amarelo</h2>
+    <p>É a campanha nacional de prevenção ao suicídio, criada para lembrar que conversar sobre o assunto salva vidas. A cor amarela veio de uma fita usada por uma família nos Estados Unidos em homenagem a um filho que não resistiu — hoje ela circula o mundo como um convite: pergunte, escute, não julgue. Este ano, escolhemos olhar esse convite através da tela que carregamos no bolso.</p>
+  </div>
+</div>
+
+<section id="tech">
+  <div class="wrap">
+    <h2 style="font-size:30px; color:var(--yellow);">Por que a tecnologia entra nessa conversa</h2>
+    <p>A internet não causa sofrimento psíquico sozinha, mas o jeito como ela foi desenhada — para prender atenção, comparar vidas e nunca deixar a conversa esfriar — mexe com a cabeça de quem cresceu conectado. Quatro fios que puxamos aqui:</p>
+
+    <div class="theme-row">
+      <div class="theme-num">01</div>
+      <div>
+        <h3>A vida editada dos outros</h3>
+        <p>Feeds mostram só os melhores ângulos de todo mundo. Comparar o próprio dia comum com o ponto alto do dia alheio é uma conta que nunca fecha — e vira terreno fértil para ansiedade e autoestima baixa.</p>
+      </div>
+    </div>
+    <div class="theme-row">
+      <div class="theme-num">02</div>
+      <div>
+        <h3>O sino que nunca silencia</h3>
+        <p>Curtidas, mensagens, e-mails de trabalho fora do horário: o corpo aprende a ficar em alerta esperando o próximo aviso. Esse estado de vigília constante cansa o sistema nervoso mesmo sem nenhuma emergência real acontecendo.</p>
+      </div>
+    </div>
+    <div class="theme-row">
+      <div class="theme-num">03</div>
+      <div>
+        <h3>Medo do amanhã digital</h3>
+        <p>Automação, inteligência artificial, empregos que mudam de forma — para quem está entrando no mercado de TI agora, o futuro parece andar mais rápido do que dá para se preparar. Essa incerteza tem nome: ansiedade tecnológica de futuro.</p>
+      </div>
+    </div>
+    <div class="theme-row">
+      <div class="theme-num">04</div>
+      <div>
+        <h3>Exposição sem botão de desligar</h3>
+        <p>Cyberbullying, exposição pública, prints que circulam sem controle. Na internet, o constrangimento não fica só entre quatro paredes — e isso pesa de um jeito que gerações anteriores não precisaram enfrentar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signs" id="sinais">
+  <div class="wrap">
+    <h2 style="font-size:30px; color:var(--yellow);">Sinais para prestar atenção</h2>
+    <p>Em si ou em quem você ama. Nenhum sinal isolado é uma sentença — mas juntos, e mantidos por semanas, merecem uma conversa.</p>
+    <div class="signs-grid">
+      <div><p>Passar a noite rolando a tela em vez de dormir, e acordar mais cansado do que deitou</p></div>
+      <div><p>Isolar-se das pessoas reais enquanto o tempo de tela sobe</p></div>
+      <div><p>Ansiedade visível ao ficar sem o celular, mesmo por pouco tempo</p></div>
+      <div><p>Falar sobre o futuro — profissional ou pessoal — só em tom de desistência</p></div>
+      <div><p>Mudanças bruscas de humor após usar redes sociais</p></div>
+      <div><p>Comentários sobre se sentir um peso para os outros ou sem saída</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="respirar">
+  <div class="wrap">
+    <h2 style="font-size:30px; color:var(--yellow);">O que ajuda, na prática</h2>
+    <p>Nenhuma dica substitui conversa e, se for o caso, acompanhamento profissional. Mas hábitos pequenos tiram o corpo do modo alerta:</p>
+    <div class="theme-row">
+      <div class="theme-num">→</div>
+      <div><h3>Notificação não é ordem</h3><p>Desativar avisos que não são urgentes devolve a escolha de quando olhar a tela, em vez de a tela escolher por você.</p></div>
+    </div>
+    <div class="theme-row">
+      <div class="theme-num">→</div>
+      <div><h3>Um horário sem tela por dia</h3><p>Nem que sejam 30 minutos antes de dormir. O cérebro precisa desse intervalo para sinalizar que o dia pode, de fato, terminar.</p></div>
+    </div>
+    <div class="theme-row">
+      <div class="theme-num">→</div>
+      <div><h3>Pergunte de verdade</h3><p>"Como você está?" seguido de silêncio para a pessoa responder vale mais que qualquer link sobre saúde mental.</p></div>
+    </div>
+
+    <div class="breathe">
+      <div class="breathe-circle" id="breatheCircle" onclick="toggleBreathe()">toque aqui</div>
+      <small id="breatheLabel">Um exercício de 4 segundos: inspire enquanto o círculo cresce, expire enquanto ele volta.</small>
+    </div>
+  </div>
+</section>
+
+<section class="help" id="ajuda">
+  <div class="wrap">
+    <h2 style="font-size:30px; color:var(--yellow);">Se você — ou alguém — precisa de ajuda agora</h2>
+    <p>Ligar custa menos do que parece e o atendimento é gratuito, sigiloso e feito por voluntários treinados.</p>
+    <div class="help-card">
+      <div>
+        <div style="font-size:14px; color:var(--cream-dim); margin-bottom:4px;">CVV — Centro de Valorização da Vida</div>
+        <div style="font-size:14px; color:var(--cream-dim);">Todos os dias, 24 horas · ligação, chat e e-mail</div>
+      </div>
+      <div class="num">188</div>
+    </div>
+    <ul class="help-list">
+      <li><span>Chat e e-mail</span><span>cvv.org.br</span></li>
+      <li><span>Emergência médica</span><span>SAMU 192</span></li>
+      <li><span>Apoio psicossocial do SUS</span><span>procure o CAPS mais próximo</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="ribbon-row"><span class="ribbon"></span></div>
+    <p>Setembro Amarelo × Tecnologia — projeto do curso técnico de Informática.<br>Compartilhe este site com quem precisar ouvir isso hoje.</p>
+  </div>
+</footer>
+
+<script>
+  function toggleBreathe(){
+    const c = document.getElementById('breatheCircle');
+    const l = document.getElementById('breatheLabel');
+    const active = c.classList.toggle('active');
+    c.textContent = active ? 'inspire…' : 'toque aqui';
+    l.textContent = active ? 'Segure por um instante e, ao tocar de novo, solte o ar devagar.' : 'Um exercício de 4 segundos: inspire enquanto o círculo cresce, expire enquanto ele volta.';
+  }
+</script>
+
+</body>
+</html>
